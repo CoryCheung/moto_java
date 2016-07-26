@@ -61,7 +61,7 @@ public class BusProductController extends BaseController {
 
     // 修改商品信息
     @ApiOperation(value = "修改商品信息")
-    @RequiresPermissions("bus.prdct.updae")
+    @RequiresPermissions("bus.prdct.update")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public Object update(HttpServletRequest request, ModelMap modelMap) {
         BusProduct record = Request2ModelUtil.covert(BusProduct.class, request);
