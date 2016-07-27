@@ -338,7 +338,9 @@ public final class TypeParseUtil {
 				Number tempNum = nf.parse(str.replaceAll(",", ""));
 				return new Integer(tempNum.intValue());
 			} else if ("Date".equalsIgnoreCase(type) || DataType.DATE.equalsIgnoreCase(type)) {
-				if (format == null || format.length() == 0) {
+				if(str.length()>=13){
+					return new Date(Long.parseLong(str));
+				}else if (format == null || format.length() == 0) {
 					String separator = String.valueOf(str.charAt(4));
 					StringBuilder pattern;
 					if (separator.matches("\\d*")) {

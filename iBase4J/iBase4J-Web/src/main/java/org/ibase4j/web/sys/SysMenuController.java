@@ -66,7 +66,7 @@ public class SysMenuController extends BaseController {
 
 	// 修改菜单
 	@ApiOperation(value = "修改菜单")
-	@RequiresPermissions("sys.menu.updae")
+	@RequiresPermissions("sys.menu.update")
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public Object update(HttpServletRequest request, ModelMap modelMap) {
 		SysMenu record = Request2ModelUtil.covert(SysMenu.class, request);
