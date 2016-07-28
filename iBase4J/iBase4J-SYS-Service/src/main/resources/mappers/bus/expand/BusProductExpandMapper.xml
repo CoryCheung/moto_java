@@ -2,9 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.ibase4j.dao.bus.expand.BusProductExpandMapper">
 	<select id="query" parameterType="java.util.Map" resultType="java.lang.Integer">
-		select id_ from bus_product where 1=1
-		<if test="keyword != null">
-			and (product_name like CONCAT('%',#{keyword},'%') or product_twodimecode like CONCAT('%',#{keyword},'%'))
+		select t1.id_ from bus_product t1 join sys_dic t2 on t1.type_=t2.code_ where t2.index_id=12
+		<!--<if test="keyword != null and  keyword !=''">-->
+			<!--and (t1.product_name like CONCAT('%',#{keyword},'%') or t1.product_twodimecode like CONCAT('%',#{keyword},'%') or t2.code_text like CONCAT('%',#{keyword},'%'))-->
+		<!--</if>-->
+		<if test="startTime != null and  startTime !=''">
+			<![CDATA[and DATE_FORMAT(t1.`update_time`,'%Y-%m-%d') >= #{startTime}]]>
+		</if>
+		<if test="endTime != null and  startTime !=''">
+			<![CDATA[and DATE_FORMAT(t1.`update_time`,'%Y-%m-%d') <=  #{endTime}]]>
+		</if>
+		<if test="productName != null and  productName !=''">
+			<![CDATA[and t1.product_name like CONCAT('%',#{productName},'%')]]>
+		</if>
+		<if test="productTwodimecode != null and  productTwodimecode !=''">
+			<![CDATA[and t1.product_twodimecode =#{productTwodimecode}]]>
+		</if>
+		<if test="type != null and  type !=''">
+			<![CDATA[and t1.type_ =#{type}]]>
+		</if>
+		<if test="enable != null and  enable !=''">
+			<![CDATA[and t1.enable_ =#{enable}]]>
 		</if>
 	</select>
 </mapper>
