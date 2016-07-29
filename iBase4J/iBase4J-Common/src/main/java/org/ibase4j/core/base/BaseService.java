@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ibase4j.core.Constants;
+import org.ibase4j.core.util.RedisUtil;
 import org.ibase4j.core.util.WebUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -28,6 +29,14 @@ public abstract class BaseService<P extends BaseProvider<T>, T extends BaseModel
 		record.setUpdateBy(WebUtil.getCurrentUser());
 		Assert.notNull(record.getId(), "ID");
 		provider.update(record);
+		try {
+			String key = getCacheKey(id);
+			if (record == null) {
+				RedisUtil.set(key, record);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
 	}
 
 	/** 新增 */

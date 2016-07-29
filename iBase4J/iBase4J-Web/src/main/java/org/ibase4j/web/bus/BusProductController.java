@@ -50,7 +50,7 @@ public class BusProductController extends BaseController {
     }
 
     // 新增商品信息
-    @ApiOperation(value = "添加商品信息")
+    @ApiOperation(value = "新增商品信息")
     @RequiresPermissions("bus.prdct.add")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public Object add(HttpServletRequest request, ModelMap modelMap) {
