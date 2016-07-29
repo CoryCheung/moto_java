@@ -29,14 +29,6 @@ public abstract class BaseService<P extends BaseProvider<T>, T extends BaseModel
 		record.setUpdateBy(WebUtil.getCurrentUser());
 		Assert.notNull(record.getId(), "ID");
 		provider.update(record);
-		try {
-			String key = getCacheKey(id);
-			if (record == null) {
-				RedisUtil.set(key, record);
-			}
-		} catch (Exception e) {
-			throw new RuntimeException(e.getMessage(), e);
-		}
 	}
 
 	/** 新增 */

@@ -119,7 +119,7 @@ public abstract class BaseProviderImpl<T extends BaseModel> implements BaseProvi
 	@Transactional
 	public T update(T record) {
 		try {
-			record.setEnable(true);
+//			record.setEnable(true);
 			record.setUpdateTime(new Date());
 			if (record.getId() == null) {
 				record.setCreateTime(new Date());
